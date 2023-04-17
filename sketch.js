@@ -9,7 +9,6 @@ function preload() {
 }
 
 function setup() {
-  
   c = createCanvas(windowWidth, windowHeight);
   background(0);
   noFill();
@@ -38,11 +37,11 @@ function draw() {
   }
 }
 
-function mouseReleased() {
+function touchEnded() {
   song.stop();
   console.log("ww");
 }
-function mousePressed() {
+function touchStarted() {
   song.play();
   console.log("111");
 }
