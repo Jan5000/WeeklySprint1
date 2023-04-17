@@ -9,7 +9,7 @@ var secondCounter = 0;
 let mFont;
 
 function preload() {
-  song = loadSound('assets/why421 - warm beer.mp3');
+  song = loadSound('assets/geir-jenssen-cho-oyu.mp3');
   mFont = loadFont('assets/AcidGrotesk-Bold.otf');
 }
 
@@ -21,6 +21,7 @@ function setup() {
   textAlign(CENTER);
   textSize(30);
   textFont(mFont);
+  setInterval(timeIt, 1000);
 }
 
 function draw() {
@@ -32,7 +33,8 @@ function draw() {
     s++;
     background(0,0,0,25);
     //c = color();
-    stroke(map(mouseX, 0, width, 200, 255),map(mouseX, 0, width, 255, 200),map(mouseY, 0, height, 255, 200));
+    stroke(255);
+    //stroke(map(mouseX, 0, width, 200, 255),map(mouseX, 0, width, 255, 200),map(mouseY, 0, height, 255, 200));
     ellipse(mouseX, mouseY, 100+abs(sin(s/50)*25), 100+abs(sin(s/50)*25));
     //text(secondCounter, mouseX, mouseY-100);
     arrayXY[s] = [round(mouseX), round(mouseY)];
@@ -46,27 +48,32 @@ function draw() {
       //console.log(arrayXY);
       background(0);
       stroke(255,255,255);
-      beginShape(LINES);
+      beginShape();
       stepSize = width/arrayXY.length;
       for(let i = 1; i < arrayXY.length; i = i+2) {
-        //fill(255);
+        fill(255);
         noStroke();
-        fill(map(arrayXY[i][0], 0, width, 100, 255),map(arrayXY[i][0], 0, width, 255, 100),map(arrayXY[i][1], 0, height, 255, 100));
-        ellipse(stepSize*i,arrayXY[i][0],10,10);
-        ellipse(stepSize*i,arrayXY[i][1],10,10);
+        //fill(map(arrayXY[i][0], 0, width, 100, 255),map(arrayXY[i][0], 0, width, 255, 100),map(arrayXY[i][1], 0, height, 255, 100));
+        //ellipse(stepSize*i,arrayXY[i][0],10,10);
+        //ellipse(stepSize*i,arrayXY[i][1],10,10);
         vertex(stepSize*i,arrayXY[i][0]);
         vertex(stepSize*i,arrayXY[i][1]);
       }
-      fill(255);
-      text(secondCounter, width/2, height/2);
-      resetCounterNow();
+      
+      
       noFill();
       stroke(255);
       strokeWeight(1);
       endShape();
+
+      fill(255);
+      stroke(0);
+      text(secondCounter, width/2, height/2);
+
       arrayXY = [];
 
-      saveCanvas(c, 'WeeklySprint1', 'jpg');
+      saveCanvas(c, 'UserData_Song:geir-jenssen-cho-oyu.mp3_'+secondCounter+'s', 'jpg');
+      resetCounterNow();
     }
     s = 0;
 
@@ -84,7 +91,8 @@ function touchEnded() {
 }
 function touchStarted() {
   song.play();
-  setInterval(timeIt, 1000);
+  //setInterval(timeIt, 1000);
+  resetCounterNow()
   //console.log("111");
 }
 
